@@ -1,6 +1,6 @@
 (* Solutions to SA2 assignment, Intro to ML *)
 
-(* Name:                                    *)
+(* Name: Anthony Martin*)
 (* Time spent on HW6:
 *)
 
@@ -24,6 +24,11 @@ val () =
 (**** Problem B ****)
 (*
 fun firstVowel _ = false
+  | firstVowel (#"a" :: _) = true
+  | firstVowel (#"e" :: _) = true
+  | firstVowel (#"i" :: _) = true
+  | firstVowel (#"o" :: _) = true
+  | firstVowel (#"u" :: _) = true;
 
 val () =
     Unit.checkExpectWith Bool.toString "firstVowel 'ack' should be true"
