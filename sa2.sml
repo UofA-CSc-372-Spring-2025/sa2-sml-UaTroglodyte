@@ -114,13 +114,13 @@ val () =
   "<circle cx=\"200\" cy=\"300\" r=\"100\" fill=\"red\" />";
 
 (**** Problem J ****)
-(*
-fun partition _ [] = ([],[])
-  | partition p (x :: xs) = ([],[]) =
+
+fun partition p [] = ([],[])
+  | partition p (x :: xs) =
       let
         val (yes, no) = partition p xs
       in
-        (if p x then (x::yes, no) else (yes, x::no))
+        if p x then (x::yes, no) else (yes, x::no)
       end;
 
 val () =
@@ -128,7 +128,7 @@ val () =
   "partition (fn x => x mod 2 = 0) [1, 2, 3, 4, 5] should return ([2, 4], [1, 3, 5])"
   (fn () => partition (fn x => x mod 2 = 0) [1, 2, 3, 4, 5])
   ([2, 4], [1, 3, 5]);
-*)
+
 
 (* Unit testing reporting *)
 
