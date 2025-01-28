@@ -25,12 +25,12 @@ val () =
 
 (**** Problem B ****)
 
-fun firstVowel _ = false
-  | firstVowel (#"a" :: _) = true
+fun firstVowel (#"a" :: _) = true
   | firstVowel (#"e" :: _) = true
   | firstVowel (#"i" :: _) = true
   | firstVowel (#"o" :: _) = true
-  | firstVowel (#"u" :: _) = true;
+  | firstVowel (#"u" :: _) = true
+  |firstVowel _ = false;
 
 val () =
     Unit.checkExpectWith Bool.toString "firstVowel 'ack' should be true"
