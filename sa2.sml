@@ -69,7 +69,7 @@ val () =
 exception Mismatch
 
 fun zip ([], []) = []
-  | zip (x :: xs, y :: ys) = (x, y) :: zip (xs::ys)
+  | zip (x :: xs, y :: ys) = (x, y) :: zip (xs,ys)
   | zip _ = raise Mismatch;
 
 (**** Problem F ****)
@@ -79,31 +79,33 @@ fun concat [] = []
 
 (**** Problem G ****)
 
-fun isDigit _  = false
-  | isDigit (#'0') = true
-  | isDigit (#'1') = true
-  | isDigit (#'2') = true
-  | isDigit (#'3') = true
-  | isDigit (#'4') = true
-  | isDigit (#'5') = true
-  | isDigit (#'6') = true
-  | isDigit (#'7') = true
-  | isDigit (#'8') = true
-  | isDigit (#'9') = true;
+fun isDigit (#"0") = true
+  | isDigit (#"1") = true
+  | isDigit (#"2") = true
+  | isDigit (#"3") = true
+  | isDigit (#"4") = true
+  | isDigit (#"5") = true
+  | isDigit (#"6") = true
+  | isDigit (#"7") = true
+  | isDigit (#"8") = true
+  | isDigit (#"9") = true
+  | isDigit _ = false;
+
 
 (**** Problem H ****)
 
 fun isAlpha c = 
-    val n = Char.ord c
-    if n >= Char.ord #"a" andalso n <= Char.ord #"Z" then true
-    else (
-          false
-    );
+  let  
+    val n = Char.ord c  
+  in  
+    (n >= Char.ord #"a" andalso n <= Char.ord #"z") orelse  
+    (n >= Char.ord #"A" andalso n <= Char.ord #"Z")  
+  end;
 
 (**** Problem I ****)
 
 fun svgCircle (cx, cy, r, fill) =
-  print ("<circle cx=\"" ^ Int.toString cx ^ "\" cy=\"" ^ Int.toString cy ^ "\" r=\"" ^ Int.toString r ^ "\" fill=\"" ^ fill ^ "\" />")
+  "<circle cx=\"" ^ Int.toString cx ^ "\" cy=\"" ^ Int.toString cy ^ "\" r=\"" ^ Int.toString r ^ "\" fill=\"" ^ fill ^ "\" />";
 
 val () =
   Unit.checkExpectWith (fn x => x)
@@ -113,7 +115,13 @@ val () =
 
 (**** Problem J ****)
 (*
-fun partition p (x :: xs) = ([],[])
+fun partition _ [] = ([],[])
+  | partition p (x :: xs) = ([],[]) =
+      let
+        val (yes, no) = partition p xs
+      in
+        (if p x then (x::yes, no) else (yes, x::no))
+      end;
 
 val () =
   Unit.checkExpectWith (fn (l1, l2) => "(" ^ Unit.listString Int.toString l1 ^ ", " ^ Unit.listString Int.toString l2 ^ ")")
