@@ -5,6 +5,7 @@
 *)
 
 (* Collaborators and references:
+  I used the pre assesment reverse function
 *)
 
 (* indicate planning to use the Unit testing module *)
@@ -13,7 +14,7 @@ use "Unit.sml";
 (**** Problem A ****)
 
 fun mynull []       = true
-  | mynull (_::_)   = false
+  | mynull (_::_)   = false;
 
 val () =
     Unit.checkExpectWith Bool.toString "mynull [] should be true"
@@ -37,7 +38,8 @@ val () =
 *)
 (**** Problem C ****)
 (*
-fun reverse xs = xs
+fun reverse [] = []
+  | reverse(x::xs) = reverse xs @ [x];
 
 val () =
   Unit.checkExpectWith (Unit.listString Int.toString) 
@@ -47,7 +49,8 @@ val () =
 *)
 (**** Problem D ****)
 (*
-fun minlist _ = 0
+fun minlist [] = raise Match
+| minlist (x::xs) = foldl Int.min x xs;
 
 val () =
   Unit.checkExnWith Int.toString
@@ -64,23 +67,43 @@ val () =
 (*
 exception Mismatch
 
-fun zip _ = []
+fun zip ([], []) = []
+  | zip (x :: xs, y :: ys) = (x, y) :: zip (xs::ys)
+  | zip _ = raise Mismatch;
 *)
 (**** Problem F ****)
 (*
-fun concat xs = xs
+fun concat [] = []
+  | concat (x :: xs) = x @ concat xs;
 *)
 (**** Problem G ****)
 (*
-fun isDigit _    = false;
+fun isDigit _  = false
+  | isDigit (#'0') = true
+  | isDigit (#'1') = true
+  | isDigit (#'2') = true
+  | isDigit (#'3') = true
+  | isDigit (#'4') = true
+  | isDigit (#'5') = true
+  | isDigit (#'6') = true
+  | isDigit (#'7') = true
+  | isDigit (#'8') = true
+  | isDigit (#'9') = true;
+
 *)
 (**** Problem H ****)
 (*
-fun isAlpha c = false
+fun isAlpha c = 
+    val n = Char.ord c
+    if n >= Char.ord #"a" andalso n <= Char.ord #"Z" then true
+    else (
+          false
+    );
 *)
 (**** Problem I ****)
 (*
-fun svgCircle (cx, cy, r, fill) = "NOT IMPLEMENTED YET"
+fun svgCircle (cx, cy, r, fill) =
+  print ("<circle cx=\"" ^ Int.toString cx ^ "\" cy=\"" ^ Int.toString cy ^ "\" r=\"" ^ Int.toString r ^ "\" fill=\"" ^ fill ^ "\" />")
 
 val () =
   Unit.checkExpectWith (fn x => x)
